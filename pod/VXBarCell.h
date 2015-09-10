@@ -6,6 +6,7 @@
 //  Copyright 2010 Swift Management AG. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @interface VXBarItem : NSObject {}
 

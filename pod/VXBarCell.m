@@ -9,7 +9,6 @@
 #import "VXBarCell.h"
 #import "VXGraphics.h"
 #import "UIFont+Category.h"
-#import "ITConfiguration.h"
 
 @implementation VXBarItem
 @end
@@ -20,7 +19,8 @@
 - (instancetype) initWithFrame:(CGRect)frame {
 	
 	if ((self = [super initWithFrame:frame])) {
-		self.font = [UIFont defaultFontOfSize:kVXTableFontSmallSize] ;
+		
+		self.font = [UIFont defaultFontOfSize:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 16.0f :  12.0f)] ;
 		self.backgroundColor = [UIColor clearColor];
         self.barGradientEffect = 0.4f;
 	}
@@ -52,7 +52,7 @@
 
 - (void) drawRect:(CGRect)rect
 {
-    DebugLog(@"Get total", nil);
+    NSLog(@"Get total", nil);
     
     double total = [self getTotal];
 
@@ -60,13 +60,13 @@
         return;
     }
 
-    DebugLog(@"Get total", nil);
+    NSLog(@"Get total", nil);
     if(self.font == nil) {
-        self.font = [UIFont defaultFontOfSize:kVXTableFontSmallSize] ;
+        self.font = [UIFont defaultFontOfSize:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 16.0f :  12.0f)] ;
         self.backgroundColor = [UIColor clearColor];
 	}
     
-    DebugLog(@"Calculate", nil);
+    NSLog(@"Calculate", nil);
     double totalWidth = rect.size.width;
     double totalHeight = rect.size.height;
     double offset = 0;
@@ -74,7 +74,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
 	
-    DebugLog(@"Total: %f, width: %f", total, totalWidth);
+    NSLog(@"Total: %f, width: %f", total, totalWidth);
     
     
     for (VXBarItem *barItem in self.items) {
@@ -162,14 +162,14 @@
 {
 	[super layoutSubviews];
 	
-    double leftMargin = kVXMargin;
-    double topMargin = kVXMargin;
-    double iconSize = kVXTableIcon;
+    double leftMargin = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 20.0f :  12.0f);
+    double topMargin = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 20.0f :  12.0f);
+    double iconSize = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 56.0f :  22.0f);
     
     if([self.detailTextLabel.text length] > 0 ) {
         CGSize detailSize = [self.detailTextLabel.text sizeWithFont:self.detailTextLabel.font];
 
-		double factor = IS_IOS7_AND_UP ? .60f : .80f;
+		double factor = .60f;
 		
         CGRect imageFrame = self.imageView.frame;
 		

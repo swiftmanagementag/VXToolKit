@@ -145,7 +145,7 @@
 		if(_max > 0 && _max <= 1) {
 			if([self.valuesFormatter isKindOfClass:[NSNumberFormatter class]]) {
 				if([(NSNumberFormatter *)self.valuesFormatter numberStyle] == NSNumberFormatterPercentStyle) {
-					DebugLog(@"Rebase to 1.0");
+					NSLog(@"Rebase to 1.0");
 					_max = 1.0;
 				}
 			}
@@ -166,7 +166,7 @@
 		// check if we have  to rebase
 		if(_min > 0 && self.valuesFormatter) {
 			if(![self.valuesFormatter isKindOfClass:[NSDateFormatter class]]) {
-				DebugLog(@"Rebase to 0");
+				NSLog(@"Rebase to 0");
 				_min = 0;
 			}
 			

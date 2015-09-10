@@ -40,16 +40,12 @@ static VXDataManager *sharedMyManager = nil;
 #pragma mark - Core Data stack
 
 - (NSManagedObjectContext *)backgroundContext {
-	if(IS_IOS7_AND_UP) {
 		if (_backgroundContext != nil) {
 			return _backgroundContext;
 		}
 		_backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 		_backgroundContext.parentContext = self.context;
 		return _backgroundContext;
-	} else {
-		return self.context;
-	}
 }
 - (NSManagedObjectContext *)context {
     if (_context != nil) {
@@ -57,12 +53,8 @@ static VXDataManager *sharedMyManager = nil;
     }
     NSPersistentStoreCoordinator *coordinator = [self persistentStore];
     if (coordinator != nil) {
-		if(IS_IOS7_AND_UP) {
 			_context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
 			[_context setUndoManager:nil];
-		} else {
-			_context = [[NSManagedObjectContext alloc] init];
-		}
         [_context setPersistentStoreCoordinator:coordinator];
         [_context setStalenessInterval:0];
     }
@@ -163,7 +155,7 @@ static VXDataManager *sharedMyManager = nil;
     if(pOverwriteExisting) {
         if ([fileManager fileExistsAtPath:storePath]) {
             if(![fileManager removeItemAtPath:storePath error:&error]) {
-				DebugLog(@"Failed to create writable database file with message '%@'.",   [error localizedDescription]);
+				NSLog(@"Failed to create writable database file with message '%@'.",   [error localizedDescription]);
 			}
         }
     }
@@ -172,7 +164,7 @@ static VXDataManager *sharedMyManager = nil;
     if (![fileManager fileExistsAtPath:storePath] && defaultStorePath) {
         // Overwrite with default DB
         if (![fileManager copyItemAtPath:defaultStorePath toPath:storePath error:&error]) {
-			DebugLog(@"Failed to create writable database file with message '%@'.",   [error localizedDescription]);
+			NSLog(@"Failed to create writable database file with message '%@'.",   [error localizedDescription]);
 		}
         
         isCopied =YES;
@@ -197,20 +189,17 @@ static VXDataManager *sharedMyManager = nil;
         
         result = setxattr(filePath, attrName, &attrValue, sizeof(attrValue), 0, 0);
     } @catch (NSException * e) {
-        DebugLog(@"Exception: %@", e);
+        NSLog(@"Exception: %@", e);
     }
     return result == 0;
 }
 - (void)save {
     NSError *error = nil;
 	
-	if(IS_IOS7_AND_UP) {
 		if ((_backgroundContext != nil) && _backgroundContext.hasChanges) {
 			[_backgroundContext save:&error];
 		}
-	}
     if ((self.context != nil) && self.context.hasChanges) {
-		if(IS_IOS7_AND_UP) {
 			[self.context performBlock:^{
 				NSError *parentError = nil;
 				if ([self.context save:&parentError]) {
@@ -220,14 +209,6 @@ static VXDataManager *sharedMyManager = nil;
 					abort();
 				};
 			}];
-		} else {
-			if ([self.context save:&error]) {
-				NSLog(@"VXDataManager context save.");
-			} else {
-				NSLog(@"VXDataManager context save failed: %@", error);
-				abort();
-			}
-        }
     }
 }
 @end

@@ -11,6 +11,7 @@
 //  this copyright and permission notice. Attribution in compiled projects is
 //  appreciated but not required.
 //
+#import <Foundation/Foundation.h>
 
 @interface VXImportParser : NSObject
 {

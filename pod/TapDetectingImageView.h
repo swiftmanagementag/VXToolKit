@@ -46,6 +46,8 @@
  Copyright (C) 2010 Apple Inc. All Rights Reserved.
  
  */
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol TapDetectingImageViewDelegate;
 

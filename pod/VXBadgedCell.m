@@ -9,7 +9,6 @@
 #import "VXBadgedCell.h"
 #import "UIFont+Category.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ITConfiguration.h"
 
 #define kBadgeHeightFactor 1.6f
 
@@ -54,17 +53,17 @@
 }
 // get text width
 - (double) textWidth {
-	return [self.text sizeWithFont:self.font].width;
+	return [self.text sizeWithAttributes:@{NSFontAttributeName:self.font}].width;
 }
 // get text width
 - (double) textHeight {
-	return [self.text sizeWithFont:self.font].height;
+	return [self.text sizeWithAttributes:@{NSFontAttributeName:self.font}].height;
 }
 - (void) calculateSize {
-	float badgeWidth = kVXBadgeWidth;
+	float badgeWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 80.0f :  36.0f);
 
-    if(([self textWidth] + kVXMargin) > badgeWidth) {
-        badgeWidth =  [self textWidth] + kVXMargin;
+    if(([self textWidth] + (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 20.0f :  12.0f)) > badgeWidth) {
+        badgeWidth =  [self textWidth] + (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 20.0f :  12.0f);
     }
     
 	if(self.forceWidth > 0.0f) {
@@ -78,7 +77,7 @@
 	if(self.forceHeight > 0.0f) {
 		self.height = self.forceHeight;
 	} else {
-		self.height = kVXTableFontSize * kBadgeHeightFactor;
+		self.height = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 30.0f :  16.0f) * kBadgeHeightFactor;
 	}
 }
 - (void) drawRect:(CGRect)rect {
@@ -179,7 +178,7 @@
 		//redraw cells in accordance to accessory
 		float version = [[[UIDevice currentDevice] systemVersion] floatValue];
 		
-		self.marginRight = 1.5f * kVXMargin;
+		self.marginRight = 1.5f *  (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 20.0f :  12.0f);
 		self.badgeCornerRadius = -1.0f;
 		self.badgeWidth = -1.0f;
 		self.badgeHeight = -1.0f;
@@ -222,7 +221,7 @@
 		self.badgeView.shadowColor = self.badgeShadowColor;
 		
 		self.badgeView.forceWidth = self.badgeWidth;
-		self.badgeView.minimumWidth = kVXBadgeWidth;
+		self.badgeView.minimumWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 80.0f :  36.0f);
 		self.badgeView.forceHeight = self.badgeHeight;
 		self.badgeView.textAlign = self.badgeTextAlign;
 
@@ -244,7 +243,7 @@
 
 		// configure font
         if(self.badgeFont == nil) {
-			self.badgeFont = [UIFont boldDefaultFontOfSize:kVXTableFontSize];
+			self.badgeFont = [UIFont boldDefaultFontOfSize:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 30.0f :  16.0f)];
 		}
 		self.badgeView.font = self.badgeFont;
 		

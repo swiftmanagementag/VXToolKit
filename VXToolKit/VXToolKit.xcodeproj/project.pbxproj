@@ -14,8 +14,6 @@
 		0A1841FB1BA1CFA400BFD43C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A1841FA1BA1CFA400BFD43C /* Images.xcassets */; };
 		0A1841FE1BA1CFA400BFD43C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1841FC1BA1CFA400BFD43C /* LaunchScreen.xib */; };
 		0A18420A1BA1CFA400BFD43C /* VXToolKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1842091BA1CFA400BFD43C /* VXToolKitTests.m */; };
-		0A1842571BA1CFBE00BFD43C /* info.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A1842131BA1CFBE00BFD43C /* info.txt */; };
-		0A1842581BA1CFBE00BFD43C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0A1842141BA1CFBE00BFD43C /* LICENSE */; };
 		0A1842591BA1CFBE00BFD43C /* VXChartAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1842181BA1CFBE00BFD43C /* VXChartAxis.m */; };
 		0A18425A1BA1CFBE00BFD43C /* VXChartBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A18421A1BA1CFBE00BFD43C /* VXChartBarView.m */; };
 		0A18425B1BA1CFBE00BFD43C /* VXChartLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A18421C1BA1CFBE00BFD43C /* VXChartLineView.m */; };
@@ -47,8 +45,8 @@
 		0A1842751BA1CFBE00BFD43C /* VXMoreTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1842501BA1CFBE00BFD43C /* VXMoreTableViewDataSource.m */; };
 		0A1842761BA1CFBE00BFD43C /* VXNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1842521BA1CFBE00BFD43C /* VXNetworkManager.m */; };
 		0A1842771BA1CFBE00BFD43C /* VXToolbarTransparent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1842541BA1CFBE00BFD43C /* VXToolbarTransparent.m */; };
-		0A1842781BA1CFBE00BFD43C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0A1842551BA1CFBE00BFD43C /* README.md */; };
-		0A1842791BA1CFBE00BFD43C /* VXToolKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0A1842561BA1CFBE00BFD43C /* VXToolKit.podspec */; };
+		0A18427B1BA1D2F900BFD43C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A18427A1BA1D2F900BFD43C /* UIKit.framework */; };
+		0A18427D1BA1D30000BFD43C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A18427C1BA1D30000BFD43C /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +139,8 @@
 		0A1842541BA1CFBE00BFD43C /* VXToolbarTransparent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VXToolbarTransparent.m; sourceTree = "<group>"; };
 		0A1842551BA1CFBE00BFD43C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		0A1842561BA1CFBE00BFD43C /* VXToolKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = VXToolKit.podspec; path = ../../VXToolKit.podspec; sourceTree = "<group>"; };
+		0A18427A1BA1D2F900BFD43C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0A18427C1BA1D30000BFD43C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +148,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A18427D1BA1D30000BFD43C /* Foundation.framework in Frameworks */,
+				0A18427B1BA1D2F900BFD43C /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				0A1841EC1BA1CFA400BFD43C /* VXToolKit */,
+				0A18427E1BA1D33900BFD43C /* Frameworks */,
 				0A1842061BA1CFA400BFD43C /* VXToolKitTests */,
 				0A1841EB1BA1CFA400BFD43C /* Products */,
 			);
@@ -303,6 +306,15 @@
 			path = chart;
 			sourceTree = "<group>";
 		};
+		0A18427E1BA1D33900BFD43C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A18427C1BA1D30000BFD43C /* Foundation.framework */,
+				0A18427A1BA1D2F900BFD43C /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -385,10 +397,7 @@
 			files = (
 				0A1841F91BA1CFA400BFD43C /* Main.storyboard in Resources */,
 				0A1841FE1BA1CFA400BFD43C /* LaunchScreen.xib in Resources */,
-				0A1842571BA1CFBE00BFD43C /* info.txt in Resources */,
-				0A1842791BA1CFBE00BFD43C /* VXToolKit.podspec in Resources */,
 				0A1841FB1BA1CFA400BFD43C /* Images.xcassets in Resources */,
-				0A1842581BA1CFBE00BFD43C /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +432,6 @@
 				0A1842591BA1CFBE00BFD43C /* VXChartAxis.m in Sources */,
 				0A1841F31BA1CFA400BFD43C /* AppDelegate.m in Sources */,
 				0A1842761BA1CFBE00BFD43C /* VXNetworkManager.m in Sources */,
-				0A1842781BA1CFBE00BFD43C /* README.md in Sources */,
 				0A18426D1BA1CFBE00BFD43C /* VXConfiguration.m in Sources */,
 				0A1842681BA1CFBE00BFD43C /* UIImage+Category.m in Sources */,
 				0A18425B1BA1CFBE00BFD43C /* VXChartLineView.m in Sources */,
@@ -518,7 +526,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -556,7 +564,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

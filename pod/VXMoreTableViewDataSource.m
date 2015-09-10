@@ -7,7 +7,6 @@
 //
 
 #import "VXMoreTableViewDataSource.h"
-#import "UIColor+Palette.h"
 
 @implementation VXMoreTableViewDataSource
 
@@ -28,7 +27,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.originalDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
-   	cell.textLabel.textColor = [UIColor textColor];
+   	cell.textLabel.textColor = [UIColor whiteColor];
     return cell;
 }
 

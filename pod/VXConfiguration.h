@@ -5,6 +5,8 @@
 //  Created by Graham Lancashire on 25.10.12.
 //
 //
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define kVXScreenWidth (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 768.0f :  320.0f)
 #define kVXTableRowHeight (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 92.0f :  46.0f)

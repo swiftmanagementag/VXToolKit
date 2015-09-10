@@ -12,7 +12,6 @@
 
 #import "VXImportParser.h"
 #import "VXConfiguration.h"
-#import "Version+Name.h"
 
 @implementation VXImport
 
@@ -35,8 +34,8 @@
 
 // indicates if the database needs to be updated
 - (BOOL)isImportNecessary {
-    // return YES;
-    
+    return YES;
+    /*
     // get the application version
 	NSString *versionApp = [VXConfiguration getVersion];
 	
@@ -63,11 +62,12 @@
         DebugLog( @"Version app:%@ db:%@ %i - no import needed", versionApp, version.code, [[version isImported] boolValue]);
         return NO;
     }
+	 */
 }
 
 - (BOOL)isInitialLoad {
     // Check if we have an initial load
-	BOOL isInitialLoad = [Version isInitial];
+	BOOL isInitialLoad = YES; //[Version isInitial];
 #if DEBUG && TARGET_IPHONE_SIMULATOR
     isInitialLoad = YES;
 #endif
@@ -76,30 +76,30 @@
 // perform the import
 - (void)import {
 	NSString *versionApp = [VXConfiguration getVersion];
-	Version *version = [Version getVersionCurrent];
+//	Version *version = [Version getVersionCurrent];
 	
     // Check if we have an initial load
 	BOOL isInitialLoad = [self isInitialLoad];
     if(isInitialLoad) {
-        DebugLog( @"Performing initial import");
+        NSLog( @"Performing initial import");
         [self importWithVersion:@""];
     } else {
-        DebugLog( @"Performing short import");
+        NSLog( @"Performing short import");
         [self importWithVersion:versionApp];
     }
     
-    if(version != nil) {
-        // mark current version as old
-        [version setStatus:@1];
-    }
+//    if(version != nil) {
+  //      // mark current version as old
+    //    [version setStatus:@1];
+    //}
     
-    Version *versionNew = [Version getVersion:versionApp];
+   // Version *versionNew = [Version getVersion:versionApp];
 	
-    if(versionNew != nil) {
-        // mark new version as current
-        [versionNew setStatus:@0];
-		[versionNew setIsImported:@YES ];
-    }
+//    if(versionNew != nil) {
+  //      // mark new version as current
+    //    [versionNew setStatus:@0];
+	//	[versionNew setIsImported:@YES ];
+    //}
     [self saveWithIsFinished:YES];
 }
 - (void)importWithVersion:(NSString *)pVersion {
@@ -109,7 +109,7 @@
     // Import files
     for(NSString *file in files) {
         // this needs to be done for all versions
-        DebugLog( @"* Importing %@ %@", file, pVersion);
+        NSLog( @"* Importing %@ %@", file, pVersion);
         if([self importFile:self.isLowerCaseFileName == YES ? [file lowercaseString] : file withVersion:pVersion]) {
         }
 	}

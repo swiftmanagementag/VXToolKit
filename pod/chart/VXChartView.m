@@ -125,7 +125,7 @@ CGRect originalBounds;
                 
                     // special handling for dates
                     if([pAxis.valuesFormatter isKindOfClass:[NSDateFormatter class]]) {
-                        DebugLog(@"Value:%f",[valueToFormat doubleValue]);
+                        NSLog(@"Value:%f",[valueToFormat doubleValue]);
                         valueString = [[pAxis valuesFormatter] stringForObjectValue:[NSDate dateWithTimeIntervalSince1970:[valueToFormat doubleValue]]];	
                     } else {
                         valueString = [[pAxis valuesFormatter] stringForObjectValue:valueToFormat];
@@ -138,12 +138,9 @@ CGRect originalBounds;
 			if (isDisplay && ![valueString isEqualToString:valueStringLast]) {
 				valueStringLast = [NSString stringWithString:valueString];
 				
-				// set the color
-				[[pAxis valuesColor] set];
-				
 				CGRect valueStringRect;
 				
-				CGSize labelSize = [valueString sizeWithFont:pAxis.font];
+				CGSize labelSize = [valueString sizeWithAttributes:@{NSFontAttributeName:pAxis.font}];
 
 				if(self.type == kChartBar && !pAxis.valuesFormatter) {
 					coord = coord + ([pAxis factor] * .4f);
@@ -164,11 +161,15 @@ CGRect originalBounds;
 					valueStringRect = CGRectMake(kVXChartMinMargin,  self.offsetY + self.axisY.dimension - coord - labelSize.height / 2, labelSize.width, labelSize.height); 
 				}
 
-				// DebugLog(@"Plotting Label Grid Axis: %li %@ x:%f y:%f", pAxis.type, valueString, valueStringRect.origin.x, valueStringRect.origin.y);
-				
 				// draw the label
 				if(isDisplay == YES && !isnan(coord)) {
-					[valueString drawInRect:valueStringRect withFont:[pAxis font] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentRight];
+					NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+					/// Set line break mode
+					paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+					/// Set text alignment
+					paragraphStyle.alignment = NSTextAlignmentRight;
+					
+					[valueString drawInRect:valueStringRect withAttributes:@{NSForegroundColorAttributeName:pAxis.valuesColor, NSFontAttributeName:pAxis.font, NSParagraphStyleAttributeName: paragraphStyle}];
 				}
 			}
 		}
@@ -271,7 +272,7 @@ CGRect originalBounds;
 		if(marker.title && marker.title.length > 0 ) {
 			CGRect markerStringRect;
 		
-			CGSize labelSize = [marker.title sizeWithFont:marker.font];
+			CGSize labelSize = [marker.title sizeWithAttributes:@{NSFontAttributeName:marker.font}];
 
 			markerStringRect = CGRectMake(endPoint.x * .75 - (labelSize.width * 1.8 / 2), endPoint.y - (labelSize.height * 1.2 / 2) , labelSize.width * 1.8, labelSize.height * 1.2); 
 		
@@ -280,8 +281,14 @@ CGRect originalBounds;
 			
 			// draw the label
 			markerStringRect = CGRectMake(endPoint.x * .75 - (labelSize.width / 2), endPoint.y - (labelSize.height  / 2) , labelSize.width, labelSize.height ); 
-			[[UIColor whiteColor] set];
-			[marker.title drawInRect:markerStringRect withFont:[marker font] lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+			
+			NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+			/// Set line break mode
+			paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+			/// Set text alignment
+			paragraphStyle.alignment = NSTextAlignmentCenter;
+			
+			[marker.title drawInRect:markerStringRect withAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:marker.font, NSParagraphStyleAttributeName: paragraphStyle}];
 		}
 	}	
 }

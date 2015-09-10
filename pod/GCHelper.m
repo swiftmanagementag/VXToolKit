@@ -56,10 +56,10 @@ static GCHelper *sharedHelper = nil;
 - (void)authenticationChanged {    
     
     if ([GKLocalPlayer localPlayer].isAuthenticated && !isAuthenticated) {
-       DebugLog(@"Authentication changed: player authenticated.");
+       NSLog(@"Authentication changed: player authenticated.");
        isAuthenticated = TRUE;           
     } else if (![GKLocalPlayer localPlayer].isAuthenticated && isAuthenticated) {
-       DebugLog(@"Authentication changed: player not authenticated");
+       NSLog(@"Authentication changed: player not authenticated");
        isAuthenticated = FALSE;
     }
                    
@@ -80,7 +80,7 @@ static GCHelper *sharedHelper = nil;
 		}
 #pragma clang diagnostic pop
 	} else {
-		DebugLog(@"Missed Method");
+		NSLog(@"Missed Method");
 	}
 }
 
@@ -96,7 +96,7 @@ static GCHelper *sharedHelper = nil;
 - (void)authenticateLocalUser {
     if (!isAvailable) return;
     if ([GKLocalPlayer localPlayer].authenticated == YES) return;
-    DebugLog(@"Authenticating local user...");
+    NSLog(@"Authenticating local user...");
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
         // Gamekit login for ios 6
@@ -115,12 +115,12 @@ static GCHelper *sharedHelper = nil;
     
 }
 - (void) reloadScoresComplete: (GKLeaderboard*) leaderBoard error: (NSError*) error {
-    DebugLog(@"Leaderboard: %@ Error: %@", leaderBoard, error  );
+    NSLog(@"Leaderboard: %@ Error: %@", leaderBoard, error  );
 
 }
 - (void) reloadHighScoresForCategory: (NSString*) category {
 	GKLeaderboard* leaderBoard= [[GKLeaderboard alloc] init];
-	leaderBoard.category = category;
+	leaderBoard.identifier = category;
 	leaderBoard.timeScope = GKLeaderboardTimeScopeAllTime;
 	leaderBoard.range= NSMakeRange(1, 1);
 	
@@ -131,7 +131,7 @@ static GCHelper *sharedHelper = nil;
 
 - (void) reportScore: (int64_t) score forCategory: (NSString*) category {
     
-	GKScore *scoreReporter = [[GKScore alloc] initWithCategory:[category length] != 0 ? category : @"Leaderboard"];	
+	GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:[category length] != 0 ? category : @"Leaderboard"];
 
 	scoreReporter.value = score;
 	[scoreReporter reportScoreWithCompletionHandler: ^(NSError *error) {
@@ -140,7 +140,7 @@ static GCHelper *sharedHelper = nil;
 }
 
 - (void) scoreReported: (NSError*) error {
-    DebugLog(@"Error: %@", error  );
+    NSLog(@"Error: %@", error  );
 }
 
 - (void) submitAchievement: (NSString*) identifier percentComplete: (double) percentComplete {

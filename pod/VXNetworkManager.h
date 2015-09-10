@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Reachability.h"
+//#import "Reachability.h"
 
 @interface VXNetworkManager : NSObject
-@property (nonatomic, strong) Reachability* reachability;
+//@property (nonatomic, strong) Reachability* reachability;
 @property BOOL isConnected;
 
 + (VXNetworkManager *)sharedInstance;

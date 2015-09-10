@@ -193,7 +193,7 @@ static CGRect swapWidthAndHeight(CGRect rect)
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
     
     // Create bitmap content with current image size and grayscale colorspace
-    CGContextRef context = CGBitmapContextCreate(nil, image.size.width, image.size.height, 8, 0, colorSpace, kCGImageAlphaNone);
+    CGContextRef context = CGBitmapContextCreate(nil, image.size.width, image.size.height, 8, 0, colorSpace, (CGBitmapInfo)kCGImageAlphaNone);
     
     // Draw image into current context, with specified rectangle
     // using previously defined context (with grayscale colorspace)
@@ -365,7 +365,7 @@ static CGRect swapWidthAndHeight(CGRect rect)
 	CGImageRef maskImageRef = [maskImage CGImage];
 	
 	// create a bitmap graphics context the size of the image
-	CGContextRef mainViewContentContext = CGBitmapContextCreate (NULL, maskImage.size.width * img.scale, maskImage.size.height * img.scale, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
+	CGContextRef mainViewContentContext = CGBitmapContextCreate (NULL, maskImage.size.width * img.scale, maskImage.size.height * img.scale, 8, 0, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
 	
 	
 	if (mainViewContentContext==NULL)

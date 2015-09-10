@@ -88,7 +88,7 @@
 			UIFont *font =  [UIFont fontWithName:fontName size:currentSize];
 			
 			if(font != nil) {
-				NSDictionary *attributes = @{UITextAttributeFont: font};
+				NSDictionary *attributes = @{NSFontAttributeName: font};
 				[segmentControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
 			}
 		} else if([subview isKindOfClass:[UITextField class]]) {

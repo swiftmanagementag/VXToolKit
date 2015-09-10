@@ -7,7 +7,6 @@
 //
 
 #import "UIFont+Category.h"
-#import "iTheorieAppDelegate.h"
 
 @implementation UIFont (Category)
 

@@ -5,10 +5,9 @@
 //  Created by Graham Lancashire on 24.02.10.
 //  Copyright 2010 Swift Management AG. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 #import "VXChartMarker.h"
 #import "UIFont+Category.h"
-#import "VXConfiguration.h"
 
 @interface VXChartMarker (PrivateMethods)
 
@@ -48,7 +47,7 @@
 	
 	// Setting default values
 	_color = [UIColor blueColor];
-	_font = [UIFont defaultFontOfSize:kVXTableFontSmallSize];
+	_font = [UIFont defaultFontOfSize:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 16.0f :  12.0f)];
 	_title = @"";
 	
 	_lineSize = 0.5f;

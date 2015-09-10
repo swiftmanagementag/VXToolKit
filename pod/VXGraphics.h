@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 void drawLinearGradient(CGContextRef context, CGRect rect, UIColor* startColor, UIColor*  endColor, BOOL vertical);
 

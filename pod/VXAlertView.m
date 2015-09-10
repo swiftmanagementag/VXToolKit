@@ -91,8 +91,19 @@
 }
 
 - (CGFloat)_estimatedHeight {
-	CGFloat titleHeight = [self.title sizeWithFont:[UIFont boldDefaultFontOfSize:17.0f] constrainedToSize:CGSizeMake(260.0f, CGFLOAT_MAX)].height;
-	CGFloat messageHeight = [self.message sizeWithFont:[UIFont defaultFontOfSize:17.0f] constrainedToSize:CGSizeMake(260.0f, CGFLOAT_MAX)].height;
+/*	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	/// Set line break mode
+	paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+	/// Set text alignment
+	paragraphStyle.alignment = NSTextAlignmentRight;
+	
+	[valueString drawInRect:valueStringRect withAttributes:@{NSForegroundColorAttributeName:pAxis.valuesColor, NSFontAttributeName:pAxis.font, NSParagraphStyleAttributeName: paragraphStyle}];
+
+	
+	CGFloat titleHeight = [self.title boundingRectWithSize:<#(CGSize)#> options:<#(NSStringDrawingOptions)#> attributes:<#(NSDictionary *)#> context:<#(NSStringDrawingContext *)#>
+*/
+	CGFloat titleHeight =   [self.title boundingRectWithSize:(CGSize){260.0f, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldDefaultFontOfSize:17.0f]} context:nil].size.height;
+	CGFloat messageHeight = [self.message boundingRectWithSize:(CGSize){260.0f, CGFLOAT_MAX}  options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldDefaultFontOfSize:17.0f]} context:nil].size.height;
 	
 	if(titleHeight > 0) {
 		titleHeight += 10.0f;
